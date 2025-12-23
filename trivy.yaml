@@ -1,0 +1,12 @@
+severity:
+  - CRITICAL
+  - HIGH
+scan:
+  skip-dirs:
+    - .terraform
+scanners:
+    - terraform
+    - terraformplan-json
+    - terraformplan-snapshot
+terraform:
+  exclude-downloaded-modules: true
