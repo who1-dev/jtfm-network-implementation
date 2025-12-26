@@ -9,4 +9,4 @@ scanners:
     - terraformplan-json
     - terraformplan-snapshot
 terraform:
-  exclude-downloaded-modules: true
+  exclude-downloaded-modules: false

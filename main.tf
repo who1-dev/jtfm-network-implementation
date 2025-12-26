@@ -1,5 +1,6 @@
 module "network" {
-  source = "git::https://github.com/who1-dev/jtfm-network.git?ref=v1.0.0"
+  source = "../../.my-modules/jtfm-network"
+  #source = "git::https://github.com/who1-dev/jtfm-network.git?ref=v1.0.0"
   env                            = var.env
   namespace                      = var.namespace
   default_tags                   = var.default_tags
