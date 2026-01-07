@@ -46,6 +46,18 @@ variable "enable_dns_hostnames" {
   default     = true
 }
 
+variable "enable_vpc_flow_logs" {
+  type        = bool
+  description = "Enable VPC Flow Logs for the VPC"
+  default     = false
+}
+
+variable "flow_log_retention" {
+  description = "Retention in days for Flow Log CloudWatch group"
+  type        = number
+  default     = 7
+}
+
 variable "azs" {
   type        = list(string)
   description = "List of Availability zones to be used in the VPC"
@@ -55,17 +67,25 @@ variable "azs" {
 # START: Security Group related Variables ──────────────────────────────────────────────────────────────────────────────────────────────────────────────-
 variable "security_groups" {
   type = map(object({
-    name        = string
-    description = string
-    rules = list(object({
+    name                  = string
+    description           = string
+    enable_default_egress = optional(bool, true)
+    ingress = list(object({
       port                          = number
       cidr_block                    = optional(string)
       referenced_security_group_key = optional(string, null)
       ip_protocol                   = optional(string, "tcp")
-      description                   = optional(string, null)
+      description                   = optional(string)
     }))
+    egress = optional(list(object({
+      port                          = number
+      cidr_block                    = optional(string)
+      referenced_security_group_key = optional(string, null)
+      ip_protocol                   = optional(string, "tcp")
+      description                   = optional(string)
+    })), [])
   }))
-  description = "Map of security groups"
+  description = "Definitions for stateful firewalls, including ingress/egress rules and source-group referencing."
   default     = {}
 }
 

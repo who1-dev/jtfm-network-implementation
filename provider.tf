@@ -11,6 +11,9 @@ terraform {
 provider "aws" {
   region = var.region
   default_tags {
-    tags = var.default_tags
+    tags = merge(var.default_tags, {
+      namespace   = format("%s-%s", var.namespace, var.env)
+      environment = var.env
+    })
   }
 }

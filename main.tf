@@ -1,6 +1,6 @@
 module "network" {
   source = "../../.my-modules/jtfm-network"
-  #source = "git::https://github.com/who1-dev/jtfm-network.git?ref=v1.0.0"
+  #source = "git::https://github.com/who1-dev/jtfm-network.git?ref=v1.0.1"
   env                            = var.env
   namespace                      = var.namespace
   default_tags                   = var.default_tags
@@ -9,6 +9,8 @@ module "network" {
   instance_tenancy               = var.instance_tenancy
   enable_dns_support             = var.enable_dns_support
   enable_dns_hostnames           = var.enable_dns_hostnames
+  enable_vpc_flow_logs           = var.enable_vpc_flow_logs
+  flow_log_retention             = var.flow_log_retention
   azs                            = var.azs
   enable_nat_gateway             = var.enable_nat_gateway
   deploy_nat_in_all_public_azs   = var.deploy_nat_in_all_public_azs
